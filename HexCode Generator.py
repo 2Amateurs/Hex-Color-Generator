@@ -10,20 +10,18 @@ daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 
 months = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
-now = datetime.datetime.now()
-start = datetime.datetime(now.year, 1, 1)
-day = (now - start).days + 1
+now = datetime.datetime.today()
+day = now.timetuple().tm_yday
+
 print("Today is " + daysOfWeek[now.weekday()] + ", " + months[now.month-1] + " " + str(now.day))
 
 pygame.init()
 def hex(rgb):
     return '#%02x%02x%02x' % rgb
 def getColor():
-    function = int((0.0437499162265*day)**2)
-    gunction = int(math.sin(day)*127.5*(math.e**(-0.01*day))+127.5)
-    green = int(abs(15+function-gunction))
-    red = int(1.39726027397 * math.sqrt(182.5**2-(day-182.5)**2))
-    blue = int(255-red)
+    green = int(abs(math.sqrt(24025 - (0.424*day)**2)+100*math.cos(255*3.14*day)))
+    red = int(127.5*math.cos(day)+127.5)
+    blue = int(0.0019*(day**2))
     color = red, green, blue
     print(hex(color))
     screen = pygame.display.set_mode((900, 600))
